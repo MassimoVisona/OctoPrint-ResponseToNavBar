@@ -10,6 +10,7 @@ class ResponseToNavBar(octoprint.plugin.StartupPlugin,
 			octoprint.plugin.SettingsPlugin):
 
 	def AlertResponse(self, comm, line, *args, **kwargs):
+		self.filter = self._settings.get(["filter"])
 		if line and line.startswith(self.filter):
 			line = line.replace(self.filter,"")
 			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=line))
@@ -24,7 +25,6 @@ class ResponseToNavBar(octoprint.plugin.StartupPlugin,
 
 	def on_settings_save(self, data):
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
-		self.filter = self._settings.get(["filter"])
 
 	def get_template_configs(self):
 		return [
