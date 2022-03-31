@@ -1,0 +1,4 @@
+include README.md
+recursive-include octoprint_ResponseToNavBar/templates *
+recursive-include octoprint_ResponseToNavBar/translations *
+recursive-include octoprint_ResponseToNavBar/static *
