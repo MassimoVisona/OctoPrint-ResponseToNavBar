@@ -15,7 +15,7 @@ $(function() {
 				$("#ResponseToNavBar").text(data.msg);
 			}
 		}
-
+        self.filter = ko.observable();
     }
 
     // This is how our plugin registers itself with the application, by adding some configuration
@@ -28,6 +28,7 @@ $(function() {
         // here is the order in which the dependencies will be injected into your view model upon
         // instantiation via the parameters argument
         ["loginStateViewModel"],
+        ["settingsViewModel"],
 
         // Finally, this is the list of selectors for all elements we want this view model to be bound to.
         ["#ResponseToNavBarMenu"]
