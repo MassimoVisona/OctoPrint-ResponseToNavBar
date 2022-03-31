@@ -1,6 +1,6 @@
 # OctoPrint-ResponseToNavBar
 
-**TODO:** Describe what your plugin does.
+A plugin that forwards custom firmware response commands to navbar.
 
 ## Setup
 
