@@ -1,20 +1,41 @@
 # -*- coding: utf-8 -*-
 
 import octoprint.plugin
+import octoprint.settings
 import string
 
-class ResponseToNavBar(octoprint.plugin.AssetPlugin,
-			octoprint.plugin.TemplatePlugin):
+class ResponseToNavBar(octoprint.plugin.StartupPlugin,
+			octoprint.plugin.AssetPlugin,
+			octoprint.plugin.TemplatePlugin,
+			octoprint.plugin.SettingsPlugin):
 
 	def AlertResponse(self, comm, line, *args, **kwargs):
-		if line and line.startswith("NAVBAR"):
-			line = line.replace("NAVBAR ","")
+		if line and line.startswith(self.filter):
+			line = line.replace(self.filter,"")
 			self._plugin_manager.send_plugin_message(self._identifier, dict(type="popup", msg=line))
 		return line
-			
+
+	def on_after_startup(self):
+		self.filter = self._settings.get(["filter"])
+		self._logger.info("Filter: %s)" % self.filter)
+						
+	def get_settings_defaults(self):
+		return dict(filter="")
+
+	def on_settings_save(self, data):
+		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
+		self.filter = self._settings.get(["filter"])
+
+	def get_template_configs(self):
+		return [
+			dict(type="navbar", custom_bindings=False),
+			dict(type="settings", custom_bindings=False)
+		]
+
 	def get_assets(self):
 		return dict(js=["js/ResponseToNavBar.js"])
-		
+
+
 	def get_version(self):
 		return self._plugin_version
 		
