@@ -21,7 +21,7 @@ plugin_version = "0.1.0"
 plugin_description = """A plugin that forwards custom firmware response commands to navbar"""
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "Massimo Visona"
+plugin_author = "MassimoVisona"
 
 # The plugin's author's mail address.
 plugin_author_email = "maxvi8@interno27.it"
